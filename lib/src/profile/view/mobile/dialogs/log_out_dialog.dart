@@ -1,8 +1,12 @@
-import 'package:crmapp/src/login/bloc/login_bloc.dart';
+import 'package:crmapp/src/loigin_firebase/bloc/login_firebase_bloc.dart';
 import 'package:crmapp/src/profile/bloc/profile_bloc.dart';
-import 'package:crmapp/src/profile/bloc/profile_event.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
+
+final log = Logger();
 
 class LogoutDialog {
   void showDeleteConfirmation(BuildContext context, ProfileBloc bloc) {
@@ -24,10 +28,10 @@ class LogoutDialog {
               child: const Text('Cancel'),
             ),
             ElevatedButton(
-              onPressed: () {
-                bloc.add(LogoutProfile());
-
-                context.read<LoginBloc>().add(LogoutEvent());
+              onPressed: () async {
+                context.read<LoginFirebaseBloc>().add(LogoutRequested());
+                context.goNamed('login');
+                log.d("message");
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
