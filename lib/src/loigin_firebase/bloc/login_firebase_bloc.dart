@@ -2,13 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:crmapp/src/loigin_firebase/repo/login_firebase_repository.dart';
 import 'package:crmapp/src/models/models.dart';
-
+import 'package:logger/logger.dart';
 part 'login_firebase_event.dart';
 part 'login_firebase_state.dart';
 
 class LoginFirebaseBloc extends Bloc<LoginFirebaseEvent, LoginFirebaseState> {
   final LoginFirebaseRepository _repository;
-
+  final log = Logger();
   LoginFirebaseBloc({required LoginFirebaseRepository repository})
     : _repository = repository,
       super(LoginFirebaseState.initial()) {
@@ -64,6 +64,7 @@ class LoginFirebaseBloc extends Bloc<LoginFirebaseEvent, LoginFirebaseState> {
     LogoutRequested event,
     Emitter<LoginFirebaseState> emit,
   ) async {
+    log.d("LoginFirebaseBloc :: _onLogoutRequested :: $event");
     await _repository.signOut();
     emit(
       state.copyWith(

@@ -30,8 +30,8 @@ class LogoutDialog {
             ElevatedButton(
               onPressed: () async {
                 context.read<LoginFirebaseBloc>().add(LogoutRequested());
-                context.goNamed('login');
-                log.d("message");
+
+                log.d("Logout triggered");
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
