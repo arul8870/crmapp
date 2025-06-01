@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UsersModel extends Equatable {
   final String id;
@@ -54,6 +55,19 @@ class UsersModel extends Equatable {
       roleId: '',
       phone: '',
       createdAt: '',
+    );
+  }
+
+  // New factory to create from Firebase User
+  factory UsersModel.fromFirebaseUser(User user) {
+    return UsersModel(
+      id: user.uid,
+      name: user.displayName ?? '',
+      email: user.email ?? '',
+      roleId:
+          '', // Role info probably not from Firebase, leave empty or fetch separately
+      phone: user.phoneNumber ?? '',
+      createdAt: '', // Firebase User does not have createdAt directly
     );
   }
 

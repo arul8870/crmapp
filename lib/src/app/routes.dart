@@ -4,8 +4,12 @@ import 'package:crmapp/src/call/voice_call.dart';
 import 'package:crmapp/src/chat/chat_page.dart';
 import 'package:crmapp/src/common/widgets/file_not_found.dart';
 import 'package:crmapp/src/customer/customer_screen.dart';
-import 'package:crmapp/src/login/bloc/login_bloc.dart';
-import 'package:crmapp/src/login/login_view.dart';
+// import 'package:crmapp/src/login/bloc/login_bloc.dart';
+import 'package:crmapp/src/loigin_firebase/bloc/login_firebase_bloc.dart';
+import 'package:crmapp/src/loigin_firebase/logine_firebase_page.dart';
+
+// import 'package:crmapp/src/login/login_view.dart';
+
 import 'package:crmapp/src/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,7 +36,7 @@ class Routes {
         name: RouteNames.login,
         path: "/login",
         builder: (BuildContext context, GoRouterState state) {
-          return LoginPage();
+          return LoginFirebasePage();
         },
       ),
 
@@ -93,7 +97,8 @@ class Routes {
     redirect: (BuildContext context, GoRouterState state) {
       final log = Logger();
       final bool signedIn =
-          context.read<LoginBloc>().state.status == LoginStatus.loggedIn;
+          context.read<LoginFirebaseBloc>().state.status ==
+          LoginFirebaseStatus.loggedIn;
       log.d("Routes:::Redirect:Is LoggedIn: $signedIn");
       final bool signingIn = state.matchedLocation == '/login';
       log.d("Routes:::Redirect:MatchedLocation: ${state.matchedLocation}");

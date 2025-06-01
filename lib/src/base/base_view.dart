@@ -1,5 +1,6 @@
 import 'package:crmapp/src/common/constants/constansts.dart';
-import 'package:crmapp/src/login/bloc/login_bloc.dart';
+
+import 'package:crmapp/src/loigin_firebase/bloc/login_firebase_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:crmapp/src/base/bloc/base_bloc.dart';
@@ -18,7 +19,7 @@ class BaseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UsersModel currentUser = context.select(
-      (LoginBloc bloc) => bloc.state.user,
+      (LoginFirebaseBloc bloc) => bloc.state.user,
     );
 
     log.d("BaseView::: In Build method::currentUser::${currentUser.toJson()}");
